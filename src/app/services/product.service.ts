@@ -4,6 +4,7 @@ import { Product } from '../models/product.model';
 import { map } from 'rxjs';
 import { StrapiResponse } from '../models/strapi-response.model';
 import { API_URL } from '../app.module';
+import { ProductForm } from '../models/product-form.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,5 +47,13 @@ export class ProductService {
           },
         }))
       );
+  }
+
+  editProduct({ id: productId, ...product }: ProductForm) {
+    return this.http.put(`${this.apiUrl}/products/${productId}`, product);
+  }
+
+  deleteProduct(productId: number) {
+    return this.http.delete(`${this.apiUrl}/products/${productId}`);
   }
 }

@@ -1,5 +1,10 @@
 <ng-container *ngIf="product$ | async as product">
-  <div class="flex gap-6">
+  <div class="flex gap-6 relative">
+    <div class="absolute top-0 right-0">
+      <button mat-icon-button [routerLink]="'../../edit/' + product.id">
+        <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
+      </button>
+    </div>
     <div class="bg-slate-300 max-w-[500px]">
       <img [src]="product.image.url" alt="img" />
     </div>
@@ -13,7 +18,7 @@
       <div class="my-10">
         <app-counter></app-counter>
       </div>
-      <div >
+      <div>
         <button mat-raised-button class="bg-orange-500 text-white w-full">
           <mat-icon fontSet="material-icons-outlined"
             >add_shopping_cart</mat-icon

@@ -1,0 +1,57 @@
+<ng-container *ngIf="product$ | async as product">
+  <div class="flex gap-6 relative">
+    <div class="absolute top-0 right-0">
+      <button mat-icon-button (click)="deleteProduct(product.id)">
+        <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+      </button>
+    </div>
+    <div class="max-w-[500px]">
+      <img [src]="product.image.url" alt="img" />
+    </div>
+    <div class="px-5 w-[40%]">
+      <form>
+        <div class="flex flex-col mb-4">
+          <label for="title" class="text-sm font-semibold">Title</label>
+          <input
+            type="text"
+            class="outline-none border-2 px-3 py-2 rounded"
+            [(ngModel)]="productForm.title"
+            name="title"
+          />
+        </div>
+        <div class="flex flex-col mb-4">
+          <label for="description" class="text-sm font-semibold"
+            >Description</label
+          >
+          <textarea
+            name="description"
+            cols="30"
+            rows="10"
+            class="outline-none border-2 px-3 py-2 rounded"
+            [(ngModel)]="productForm.description"
+          >
+          </textarea>
+        </div>
+        <div class="flex flex-col mb-4">
+          <label for="price" class="text-sm font-semibold">Price</label>
+          <input
+            type="text"
+            class="outline-none border-2 px-3 py-2 rounded"
+            [(ngModel)]="productForm.price"
+            name="price"
+          />
+        </div>
+      </form>
+
+      <div class="mt-10">
+        <button
+          mat-raised-button
+          class="bg-orange-500 text-white w-full"
+          (click)="editProduct()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

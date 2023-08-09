@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProductService } from 'src/app/services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { tap, switchMap, Observable } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { CounterComponent } from '../counter/counter.component';
@@ -11,7 +11,13 @@ import { CounterComponent } from '../counter/counter.component';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, CounterComponent],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    CounterComponent,
+    RouterModule,
+  ],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
