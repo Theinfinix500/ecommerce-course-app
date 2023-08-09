@@ -10,6 +10,7 @@ export interface Product {
   updatedAt: string;
   publishedAt: string;
   image: Image;
+  price:number;
   categories: Category[];
 }
 
