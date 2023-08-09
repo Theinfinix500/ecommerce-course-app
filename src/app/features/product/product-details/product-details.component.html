@@ -1,1 +1,26 @@
-<p>product-details works!</p>
+<ng-container *ngIf="product$ | async as product">
+  <div class="flex gap-6">
+    <div class="bg-slate-300 max-w-[500px]">
+      <img [src]="product.image.url" alt="img" />
+    </div>
+    <div class="px-5">
+      <h1 class="font-bold">{{ product.title }}</h1>
+      <p class="my-4">{{ product.description }}</p>
+      <span class="font-semibold">{{
+        product.price | currency : "MAD" : "DH" : "" : "fr-FR"
+      }}</span>
+
+      <div class="my-10">
+        <app-counter></app-counter>
+      </div>
+      <div >
+        <button mat-raised-button class="bg-orange-500 text-white w-full">
+          <mat-icon fontSet="material-icons-outlined"
+            >add_shopping_cart</mat-icon
+          >
+          Add To Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, InjectionToken } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeFR from '@angular/common/locales/fr';
 registerLocaleData(localeFR);
+
+export const API_URL = new InjectionToken('API_URL');
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +33,10 @@ registerLocaleData(localeFR);
     {
       provide: LOCALE_ID,
       useValue: 'fr-FR',
+    },
+    {
+      provide: API_URL,
+      useValue: 'http://localhost:1337/api',
     },
   ],
   bootstrap: [AppComponent],
