@@ -3,4 +3,5 @@ export interface ProductForm {
   title: string;
   description: string;
   price: number;
+  image?: File | null
 }

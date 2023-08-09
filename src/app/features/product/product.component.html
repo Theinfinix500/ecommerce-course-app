@@ -1,3 +1,13 @@
+<div class="flex justify-end mb-5">
+  <button
+    mat-raised-button
+    class="bg-orange-500 text-white"
+    routerLink="/products/add"
+  >
+    <mat-icon fontSet="material-icons-outlined">add</mat-icon>
+    New Product
+  </button>
+</div>
 <div class="flex gap-6 flex-wrap">
   <ng-container *ngIf="products$ | async as products">
     <app-product-card

@@ -24,10 +24,12 @@ export class ProductService {
         map(({ data }) =>
           data.map((product) => ({
             ...product,
-            image: {
-              ...product.image,
-              url: `${this.API_URL}${product.image.url}`,
-            },
+            image: product.image
+              ? {
+                  ...product.image,
+                  url: `${this.API_URL}${product.image.url}`,
+                }
+              : null,
           }))
         )
       );
@@ -41,12 +43,23 @@ export class ProductService {
       .pipe(
         map(({ data: product }) => ({
           ...product,
-          image: {
-            ...product.image,
-            url: `${this.API_URL}${product.image.url}`,
-          },
+          image: product.image
+            ? {
+                ...product.image,
+                url: `${this.API_URL}${product?.image.url}`,
+              }
+            : null,
         }))
       );
+  }
+
+  addProduct({ image, ...product }: ProductForm) {
+    const formData = new FormData();
+    formData.append('files.image', image as File, image?.name);
+
+    formData.append('data', JSON.stringify(product));
+
+    return this.http.post(`${this.apiUrl}/products`, formData);
   }
 
   editProduct({ id: productId, ...product }: ProductForm) {

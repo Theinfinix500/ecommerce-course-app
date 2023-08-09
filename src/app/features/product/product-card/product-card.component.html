@@ -1,24 +1,30 @@
 <a (click)="handleClick()" class="cursor-pointer">
-  <div class="shadow p-5 rounded mb-4 w-[300px] h-full  flex flex-col">
+  <div class="shadow p-5 rounded mb-4 w-[300px] h-full flex flex-col relative">
+    <span
+      class="absolute top-2 left-2 bg-orange-600 text-white px-3 rounded shadow"
+      *ngIf="product.isNew"
+      >NEW</span
+    >
     <div class="w-full">
       <img
-        [src]="product.image.url"
-        [alt]="product.image.name"
+        [src]="product.image?.url"
+        [alt]="product.image?.name"
         class="w-full h-full"
       />
     </div>
     <div class="flex-1">
       <h1 class="font-semibold">{{ product.title }}</h1>
       <p class="my-3">{{ product.description }}</p>
-      <span class="font-semibold">{{ product.price | currency : "MAD" : "DH" : "" : "fr-FR" }}</span>
+      <span class="font-semibold">{{
+        product.price | currency : "MAD" : "DH" : "" : "fr-FR"
+      }}</span>
     </div>
 
     <div class="mt-5">
-      <button mat-raised-button class="bg-orange-500 text-white w-full" >
+      <button mat-raised-button class="bg-orange-500 text-white w-full">
         <mat-icon fontSet="material-icons-outlined">add_shopping_cart</mat-icon>
         Add To Cart
       </button>
     </div>
   </div>
-
 </a>

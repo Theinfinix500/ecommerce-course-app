@@ -1,5 +1,5 @@
-import { Category } from "./category.model";
-import { Image } from "./image.model";
+import { Category } from './category.model';
+import { Image } from './image.model';
 
 export interface Product {
   id: number;
@@ -9,10 +9,7 @@ export interface Product {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  image: Image;
-  price:number;
+  image: Image | null;
+  price: number;
   categories: Category[];
 }
-
-
-
