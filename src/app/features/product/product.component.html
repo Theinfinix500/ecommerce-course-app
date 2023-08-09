@@ -1,0 +1,12 @@
+<div class="flex gap-6 flex-wrap">
+  <ng-container *ngIf="products$ | async as products">
+    <div *ngFor="let product of products" class="shadow p-5 rounded mb-4 w-[300px]">
+      <div class="w-full">
+        <img [src]="product.image.url" [alt]="product.image.name" class="w-full h-full" />
+      </div>
+      <h1 class="font-semibold">{{ product.title }}</h1>
+      <p class="my-3">{{ product.description }}</p>
+      <span>{{ product.isNew }}</span>
+    </div>
+  </ng-container>
+</div>
