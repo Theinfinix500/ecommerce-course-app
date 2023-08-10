@@ -7,6 +7,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { tap, switchMap, Observable } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { CounterComponent } from '../counter/counter.component';
+import { HasRoleDirective } from 'src/app/directives/has-role.directive';
 
 @Component({
   selector: 'app-product-details',
@@ -17,6 +18,7 @@ import { CounterComponent } from '../counter/counter.component';
     MatButtonModule,
     CounterComponent,
     RouterModule,
+    HasRoleDirective,
   ],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],

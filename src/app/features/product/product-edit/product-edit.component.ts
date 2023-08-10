@@ -8,11 +8,18 @@ import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductForm } from 'src/app/models/product-form.model';
 import { FormsModule } from '@angular/forms';
+import { HasRoleDirective } from 'src/app/directives/has-role.directive';
 
 @Component({
   selector: 'app-product-edit',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    FormsModule,
+    HasRoleDirective,
+  ],
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.scss'],
 })

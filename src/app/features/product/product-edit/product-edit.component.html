@@ -1,6 +1,6 @@
 <ng-container *ngIf="product$ | async as product">
   <div class="flex gap-6 relative">
-    <div class="absolute top-0 right-0">
+    <div class="absolute top-0 right-0" *appHasRole="'Admin'">
       <button mat-icon-button (click)="deleteProduct(product.id)">
         <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
       </button>
