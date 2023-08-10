@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'products',
-    // canActivate: [authGuard, hasRoleGuard],
+    canActivate: [authGuard, hasRoleGuard],
     data: {
       roles: ['Admin'],
     },

@@ -1,4 +1,9 @@
-import { NgModule, LOCALE_ID, InjectionToken } from '@angular/core';
+import {
+  NgModule,
+  LOCALE_ID,
+  InjectionToken,
+  APP_INITIALIZER,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,10 +19,29 @@ import { registerLocaleData } from '@angular/common';
 import localeFR from '@angular/common/locales/fr';
 import { AuthModule } from './auth/auth.module';
 import { JwtInterceptor } from './jwt.interceptor';
+import { AuthService } from './services/auth.service';
+import { catchError, of } from 'rxjs';
 registerLocaleData(localeFR);
 
 export const API_URL = new InjectionToken('API_URL');
 
+function initializeAuth(auth: AuthService) {
+  return () => {
+    return new Promise<void>((resolve, reject) => {
+      auth
+        .getUserInfos()
+        .pipe(
+          catchError((err) => {
+            reject(err);
+            return of(null);
+          })
+        )
+        .subscribe(() => {
+          resolve();
+        });
+    });
+  };
+}
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -45,6 +69,12 @@ export const API_URL = new InjectionToken('API_URL');
     {
       provide: API_URL,
       useValue: 'http://localhost:1337/api',
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAuth,
+      multi: true,
+      deps: [AuthService],
     },
   ],
   bootstrap: [AppComponent],

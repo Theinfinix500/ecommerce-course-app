@@ -8,7 +8,7 @@ import { tap, BehaviorSubject, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedIn = new BehaviorSubject(true);
+  private isLoggedIn = new BehaviorSubject(false);
   isLoggedIn$ = this.isLoggedIn.asObservable();
   private connectedUser: BehaviorSubject<any> = new BehaviorSubject(null);
 
@@ -35,11 +35,16 @@ export class AuthService {
   }
 
   connectedUserRole() {
-    return this.connectedUser.value?.role?.name || 'User';
+    return this.connectedUser.value?.role?.name;
   }
 
   getUserInfos() {
-    return this.http.get(`${this.apiUrl}/users/me?populate=*`);
+    return this.http.get(`${this.apiUrl}/users/me?populate=*`).pipe(
+      tap((user: any) => {
+        this.isLoggedIn.next(true);
+        this.connectedUser.next(user);
+      })
+    );
   }
 
   isLoggedInValue() {
