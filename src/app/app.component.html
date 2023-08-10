@@ -7,12 +7,19 @@
   </div>
   <div class="font-bold text-lg">ShopLia</div>
   <div>
-    <button mat-icon-button routerLink="/login">
+    <button mat-icon-button [matMenuTriggerFor]="loginMenu">
       <mat-icon fontSet="material-icons-outlined">person</mat-icon>
     </button>
-    <button mat-icon-button>
+    <mat-menu #loginMenu="matMenu">
+      <button mat-menu-item routerLink="/login">Login</button>
+      <button mat-menu-item (click)="logout()" *appIsLoggedIn>Logout</button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="cart">
       <mat-icon fontSet="material-icons-outlined">shopping_cart</mat-icon>
     </button>
+    <mat-menu #cart="matMenu" [hasBackdrop]="false">
+      <app-cart></app-cart>
+    </mat-menu>
   </div>
 </nav>
 <main class="px-[40px] pt-8">

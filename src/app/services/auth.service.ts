@@ -11,6 +11,7 @@ export class AuthService {
   private isLoggedIn = new BehaviorSubject(false);
   isLoggedIn$ = this.isLoggedIn.asObservable();
   private connectedUser: BehaviorSubject<any> = new BehaviorSubject(null);
+  connectedUser$ = this.connectedUser.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -57,5 +58,11 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.isLoggedIn.next(false);
+    this.connectedUser.next(null);
   }
 }

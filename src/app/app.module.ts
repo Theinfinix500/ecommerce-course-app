@@ -21,6 +21,10 @@ import { AuthModule } from './auth/auth.module';
 import { JwtInterceptor } from './jwt.interceptor';
 import { AuthService } from './services/auth.service';
 import { catchError, of } from 'rxjs';
+import {MatMenuModule} from '@angular/material/menu';
+import { IsLoggedInDirective } from './directives/is-logged-in.directive';
+import { CartComponent } from './components/cart/cart.component';
+
 registerLocaleData(localeFR);
 
 export const API_URL = new InjectionToken('API_URL');
@@ -55,6 +59,9 @@ function initializeAuth(auth: AuthService) {
     HttpClientModule,
     AuthModule,
     AppRoutingModule,
+    MatMenuModule,
+    IsLoggedInDirective,
+    CartComponent
   ],
   providers: [
     {
