@@ -9,9 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/home/home.component';
 import { ExampleComponent } from './components/example/example.component';
 import { ProductModule } from './features/product/product.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeFR from '@angular/common/locales/fr';
+import { AuthModule } from './auth/auth.module';
+import { JwtInterceptor } from './jwt.interceptor';
 registerLocaleData(localeFR);
 
 export const API_URL = new InjectionToken('API_URL');
@@ -20,7 +22,6 @@ export const API_URL = new InjectionToken('API_URL');
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
@@ -28,8 +29,15 @@ export const API_URL = new InjectionToken('API_URL');
     HomeComponent,
     ProductModule,
     HttpClientModule,
+    AuthModule,
+    AppRoutingModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
     {
       provide: LOCALE_ID,
       useValue: 'fr-FR',
