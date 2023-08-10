@@ -1,44 +1,52 @@
 <div class="min-w-[450px]">
-  <div class="p-4">
-    <!-- Header -->
-    <div class="flex items-center justify-between">
-      <h2 class="font-semibold text-lg">Cart (5)</h2>
-      <!-- Commands -->
-      <div>
-        <button>Remove All</button>
+  <ng-container *ngIf="cartService.cartItems$ | async as products">
+    <div class="p-4">
+      <!-- Header -->
+      <div class="flex items-center justify-between">
+        <h2 class="font-semibold text-lg">Cart ({{ products.length }})</h2>
+        <!-- Commands -->
+        <div>
+          <button (click)="removeAll()" mat-button>Remove All</button>
+        </div>
       </div>
-    </div>
 
-    <!-- Body -->
-    <div class="border-t-2 mt-6">
-      <!-- Card Items -->
-      <div class="flex flex-col mt-6 max-h-[470px] overflow-auto">
-        <!-- Card Item -->
-        <div
-          *ngFor="let item of [].constructor(5); let i = index"
-          class="mb-4 rounded shadow"
-        >
-          <div class="flex gap-4">
-            <!-- image -->
-            <div class="w-[140px]">
-              <img
-                src="http://localhost:1337/uploads/sp_pgm_dc_11_ad468b57f9.jpg"
-                alt="img"
-                class="w-full h-full object-cover object-top rounded"
-              />
-            </div>
-            <!-- details -->
-            <div>
-              <h1 class="font-bold">product.title</h1>
-              <p class="my-4">product.description</p>
-              <span class="font-semibold">
-                <!-- product.price | currency : "MAD" : "DH" : "" : "fr-FR" -->
-                333
-              </span>
+      <!-- Body -->
+      <div class="border-t-2 mt-6">
+        <!-- Card Items -->
+        <div class="flex flex-col mt-6 max-h-[470px] overflow-auto">
+          <!-- Card Item -->
+          <div
+            *ngFor="let product of products; let i = index"
+            class="mb-4 rounded shadow relative"
+          >
+            <div class="flex gap-4">
+              <!-- image -->
+              <div class="w-[140px]">
+                <img
+                  [src]="product.image?.url"
+                  [alt]="product.image?.name"
+                  class="w-full h-full object-cover object-top rounded"
+                />
+              </div>
+              <!-- details -->
+              <div>
+                <h1 class="font-bold">{{ product.title }}</h1>
+                <p class="my-4">{{ product.description }}</p>
+                <span class="font-semibold">
+                  {{ product.price | currency : "MAD" : "DH" : "" : "fr-FR" }}
+                </span>
+                <div class="absolute top-0 right-0">
+                  <button mat-icon-button (click)="removeItem(product.id)">
+                    <mat-icon fontSet="material-icons-outlined"
+                      >delete</mat-icon
+                    >
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </div></ng-container
+  >
 </div>

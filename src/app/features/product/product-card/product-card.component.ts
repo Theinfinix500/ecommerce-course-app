@@ -14,8 +14,13 @@ import { Product } from 'src/app/models/product.model';
 export class ProductCardComponent {
   @Input() product!: Product;
   @Output() itemClicked: EventEmitter<any> = new EventEmitter();
+  @Output() itemAdded: EventEmitter<any> = new EventEmitter();
 
   handleClick() {
     this.itemClicked.emit();
+  }
+
+  addToCart(event: Event) {
+    this.itemAdded.emit(event);
   }
 }

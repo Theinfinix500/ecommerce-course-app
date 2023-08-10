@@ -15,6 +15,7 @@
       *ngFor="let product of products"
       [product]="product"
       (itemClicked)="navigateTo(product.id)"
+      (itemAdded)="addToCart($event, product)"
     ></app-product-card>
   </ng-container>
 </div>

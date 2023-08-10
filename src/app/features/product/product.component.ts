@@ -1,3 +1,4 @@
+import { CartService } from './../../services/cart.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Observable } from 'rxjs';
@@ -14,7 +15,11 @@ export class ProductComponent implements OnInit {
   public productsService: ProductService;
   products$!: Observable<Product[]>;
 
-  constructor(private router: Router, private auth: AuthService) {
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private cartService: CartService
+  ) {
     this.productsService = inject(ProductService);
   }
 
@@ -26,7 +31,9 @@ export class ProductComponent implements OnInit {
     this.router.navigateByUrl(`/products/details/${productId}`);
   }
 
-  hasRole(role: string | string[]) {
-    return role.includes(this.auth.connectedUserRole());
+  addToCart(event: Event, product: Product) {
+    event.stopPropagation();
+    this.cartService.addItemToCart(product);
+    console.log(product);
   }
 }
