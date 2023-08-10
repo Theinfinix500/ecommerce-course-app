@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ProductComponent implements OnInit {
   public productsService: ProductService;
   products$!: Observable<Product[]>;
+  sqliInput = '';
 
   constructor(
     private router: Router,

@@ -7,6 +7,8 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductComponent } from './product.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { HasRoleDirective } from 'src/app/directives/has-role.directive';
+import { SqliInputComponent } from 'src/app/components/sqli-input/sqli-input.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ProductComponent],
@@ -16,7 +18,9 @@ import { HasRoleDirective } from 'src/app/directives/has-role.directive';
     ProductCardComponent,
     MatButtonModule,
     MatIconModule,
-    HasRoleDirective
+    HasRoleDirective,
+    SqliInputComponent,
+    FormsModule,
   ],
 })
 export class ProductModule {}

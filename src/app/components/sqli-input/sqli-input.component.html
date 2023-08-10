@@ -1,0 +1,18 @@
+<div class="flex items-center gap-2 relative">
+  <mat-icon
+    *ngIf="icon"
+    fontSet="material-icons-outlined"
+    class="absolute left-1"
+    >{{ icon }}</mat-icon
+  >
+  <input
+    type="text"
+    value="sqli input"
+    class="border pl-[34px] py-1"
+    [value]="value"
+    #input
+    (input)="handleChange(input.value)"
+    (focus)="touched()"
+    [disabled]="disabled"
+  />
+</div>

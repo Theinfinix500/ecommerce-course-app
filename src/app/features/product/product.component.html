@@ -1,4 +1,19 @@
 <div class="flex justify-end mb-5">
+  <ng-template>
+    <!-- Control Value Accessor Example -->
+    <div>
+      <app-sqli-input
+        [(ngModel)]="sqliInput"
+        name="sqliInput"
+        #customInput="ngModel"
+        icon="search"
+        [disabled]="false"
+      ></app-sqli-input>
+      {{ customInput.touched }}
+      {{ customInput.value }}
+    </div>
+  </ng-template>
+
   <button
     mat-raised-button
     class="bg-orange-500 text-white"
