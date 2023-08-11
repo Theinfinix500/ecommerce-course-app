@@ -1,3 +1,4 @@
+import { Select } from '@ngxs/store';
 import { CartService } from './../../../services/cart.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,6 +36,7 @@ import {
 export class ProductDetailsComponent implements OnInit {
   product$!: Observable<Product>;
   productQtyControl!: FormControl;
+  @Select((state: any) => state.products.text) testText$!: Observable<string[]>;
 
   constructor(
     private productService: ProductService,

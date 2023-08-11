@@ -35,9 +35,7 @@
                 <span class="font-semibold">
                   {{ product.price | currency : "MAD" : "DH" : "" : "fr-FR" }}
                 </span>
-                <div class="font-semibold">
-                  {{ product.qty }} items
-                </div>
+                <div class="font-semibold">{{ product.qty }} items</div>
                 <div class="absolute top-0 right-0">
                   <button mat-icon-button (click)="removeItem(product.id)">
                     <mat-icon fontSet="material-icons-outlined"

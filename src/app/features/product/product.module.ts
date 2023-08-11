@@ -1,3 +1,4 @@
+import { NgxsModule } from '@ngxs/store';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { HasRoleDirective } from 'src/app/directives/has-role.directive';
 import { SqliInputComponent } from 'src/app/components/sqli-input/sqli-input.component';
 import { FormsModule } from '@angular/forms';
+import { ProductState } from './store/product.state';
 
 @NgModule({
   declarations: [ProductComponent],
@@ -21,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     HasRoleDirective,
     SqliInputComponent,
     FormsModule,
+    NgxsModule.forFeature([ProductState])
   ],
 })
 export class ProductModule {}

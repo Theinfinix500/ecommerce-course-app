@@ -21,9 +21,12 @@ import { AuthModule } from './auth/auth.module';
 import { JwtInterceptor } from './jwt.interceptor';
 import { AuthService } from './services/auth.service';
 import { catchError, of } from 'rxjs';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { IsLoggedInDirective } from './directives/is-logged-in.directive';
 import { CartComponent } from './components/cart/cart.component';
+import { NgxsModule } from '@ngxs/store';
+import { ProductState } from './states/product.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 registerLocaleData(localeFR);
 
@@ -61,7 +64,11 @@ function initializeAuth(auth: AuthService) {
     AppRoutingModule,
     MatMenuModule,
     IsLoggedInDirective,
-    CartComponent
+    CartComponent,
+    NgxsModule.forRoot([], {
+      developmentMode: true,
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
   providers: [
     {

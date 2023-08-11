@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { AddProductAction } from './actions/add-product.action';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
     this.auth.connectedUser$.subscribe((user) => {
@@ -16,6 +22,10 @@ export class AppComponent implements OnInit {
         this.router.navigateByUrl('/home');
       }
     });
+  }
+
+  testNgxsStore() {
+    this.store.dispatch(new AddProductAction(new Date().toISOString()));
   }
 
   logout() {
