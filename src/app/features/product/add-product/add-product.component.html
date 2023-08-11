@@ -26,23 +26,9 @@
         </button>
       </div>
     </ng-container>
-    <ng-template #filePreviewTpl>
-      <div class="w-[250px] h-[350px] relative">
-        <div class="absolute top-0 right-0">
-          <button mat-icon-button (click)="emptyFile()">
-            <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
-          </button>
-        </div>
-        <img
-          [src]="previewImgUrl"
-          alt=""
-          class="w-full h-full object-cover object-top"
-        />
-      </div>
-    </ng-template>
 
     <div class="px-5 w-[40%]">
-      <form>
+      <form #productSubmitForm="ngForm" (ngSubmit)="addProduct()">
         <div class="flex flex-col mb-4">
           <label for="title" class="text-sm font-semibold">Title</label>
           <input
@@ -50,7 +36,18 @@
             class="outline-none border-2 px-3 py-2 rounded"
             [(ngModel)]="productForm.title"
             name="title"
+            #title="ngModel"
+            required
           />
+          <span
+            class="text-red-500 font-medium text-sm"
+            *ngIf="
+              (title.touched || productSubmitForm.submitted) &&
+              title.errors?.required
+            "
+          >
+            Title should be required
+          </span>
         </div>
         <div class="flex flex-col mb-4">
           <label for="description" class="text-sm font-semibold"
@@ -62,8 +59,19 @@
             rows="10"
             class="outline-none border-2 px-3 py-2 rounded"
             [(ngModel)]="productForm.description"
+            #description="ngModel"
+            required
           >
           </textarea>
+          <span
+            class="text-red-500 font-medium text-sm"
+            *ngIf="
+              (description.touched || productSubmitForm.submitted) &&
+              description.errors?.required
+            "
+          >
+            Description should be required
+          </span>
         </div>
         <div class="flex flex-col mb-4">
           <label for="price" class="text-sm font-semibold">Price</label>
@@ -72,19 +80,40 @@
             class="outline-none border-2 px-3 py-2 rounded"
             [(ngModel)]="productForm.price"
             name="price"
+            #price="ngModel"
+            required
           />
+          <span
+            class="text-red-500 font-medium text-sm"
+            *ngIf="
+              (price.touched || productSubmitForm.submitted) &&
+              price.errors?.required
+            "
+          >
+            Price should be required
+          </span>
+        </div>
+        <div class="mt-10">
+          <button mat-raised-button class="bg-orange-500 text-white w-full">
+            Save
+          </button>
         </div>
       </form>
-
-      <div class="mt-10">
-        <button
-          mat-raised-button
-          class="bg-orange-500 text-white w-full"
-          (click)="addProduct()"
-        >
-          Save
-        </button>
-      </div>
     </div>
   </div>
 </ng-container>
+
+<ng-template #filePreviewTpl>
+  <div class="w-[250px] h-[350px] relative">
+    <div class="absolute top-0 right-0">
+      <button mat-icon-button (click)="emptyFile()">
+        <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+      </button>
+    </div>
+    <img
+      [src]="previewImgUrl"
+      alt=""
+      class="w-full h-full object-cover object-top"
+    />
+  </div>
+</ng-template>
