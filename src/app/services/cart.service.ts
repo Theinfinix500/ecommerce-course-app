@@ -11,8 +11,25 @@ export class CartService {
   );
   cartItems$ = this.cartItems.asObservable();
 
-  addItemToCart(item: Product) {
-    this.cartItems.next([item, ...this.cartItems.value]);
+  addItemToCart(product: Product) {
+    product = { ...product, qty: 1 };
+    const cartItems = this.cartItems.value;
+    let searchedProduct = cartItems.find((item) => item.id === product.id);
+
+    if (searchedProduct) {
+      searchedProduct = {
+        ...searchedProduct,
+        qty: (searchedProduct.qty as number) + 1,
+      };
+      this.cartItems.next([
+        searchedProduct,
+        ...this.cartItems.value.filter(
+          (item) => item.id !== searchedProduct?.id
+        ),
+      ]);
+    } else {
+      this.cartItems.next([product, ...this.cartItems.value]);
+    }
     localStorage.setItem('cart', JSON.stringify(this.cartItems.value));
   }
 

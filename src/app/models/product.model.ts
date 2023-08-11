@@ -11,5 +11,6 @@ export interface Product {
   publishedAt: string;
   image: Image | null;
   price: number;
+  qty?:number;
   categories: Category[];
 }
