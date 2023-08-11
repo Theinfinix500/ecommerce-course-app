@@ -11,7 +11,13 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss'],
 })
@@ -22,18 +28,32 @@ export class AddProductComponent {
     title: '',
     description: '',
     price: 0,
-    image: null
+    image: null,
   };
+  previewImgUrl: any;
 
   constructor(private productService: ProductService) {}
-
 
   addProduct() {
     this.productService.addProduct(this.productForm).subscribe(console.log);
   }
 
-  handleFiles({target:{files}}:any) {
-    console.log(files[0]);
+  handleFiles({ target: { files } }: any) {
     this.productForm.image = files[0];
+    this.previewImage(files[0]);
+  }
+
+  emptyFile() {
+    this.previewImgUrl = null;
+  }
+
+  private previewImage(file: File) {
+    const fileReader = new FileReader();
+
+    fileReader.onload = ({ target }) => {
+      this.previewImgUrl = target?.result;
+    };
+
+    fileReader.readAsDataURL(file);
   }
 }

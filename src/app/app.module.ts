@@ -25,7 +25,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { IsLoggedInDirective } from './directives/is-logged-in.directive';
 import { CartComponent } from './components/cart/cart.component';
 import { NgxsModule } from '@ngxs/store';
-import { ProductState } from './states/product.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 registerLocaleData(localeFR);

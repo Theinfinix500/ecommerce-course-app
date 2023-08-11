@@ -1,13 +1,46 @@
 <ng-container>
   <div class="flex gap-6 relative">
-    <div class="max-w-[500px]">
-      <!-- <img [src]="product.image.url" alt="img" /> -->
-      <input
-        type="file"
-        (change)="handleFiles($event)"
-        name="image"
-      />
-    </div>
+    <ng-container *ngIf="!previewImgUrl; else filePreviewTpl">
+      <div
+        class="w-[250px] h-[350px] flex flex-col items-center border p-7 justify-center rounded"
+      >
+        <input
+          type="file"
+          (change)="handleFiles($event)"
+          name="image"
+          class="hidden"
+          #fileInput
+        />
+        <h1 class="font-bold">Insert your files here</h1>
+        <img
+          src="assets/icons/cloud-upload-outline.svg"
+          alt=""
+          class="text-slate-400 fill-blue-500 my-7"
+        />
+        <button
+          mat-raised-button
+          (click)="fileInput.click()"
+          class="bg-green-400 text-white"
+        >
+          Choose file
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #filePreviewTpl>
+      <div class="w-[250px] h-[350px] relative">
+        <div class="absolute top-0 right-0">
+          <button mat-icon-button (click)="emptyFile()">
+            <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+          </button>
+        </div>
+        <img
+          [src]="previewImgUrl"
+          alt=""
+          class="w-full h-full object-cover object-top"
+        />
+      </div>
+    </ng-template>
+
     <div class="px-5 w-[40%]">
       <form>
         <div class="flex flex-col mb-4">
