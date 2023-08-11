@@ -35,6 +35,5 @@ export class ProductComponent implements OnInit {
   addToCart(event: Event, product: Product) {
     event.stopPropagation();
     this.cartService.addItemToCart(product);
-    console.log(product);
   }
 }

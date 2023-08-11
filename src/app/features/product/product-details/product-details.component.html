@@ -16,10 +16,15 @@
       }}</span>
 
       <div class="my-10">
-        <app-counter></app-counter>
+        <app-counter [formControl]="productQtyControl"></app-counter>
+        {{ productQtyControl.value }}
       </div>
       <div>
-        <button mat-raised-button class="bg-orange-500 text-white w-full">
+        <button
+          mat-raised-button
+          class="bg-orange-500 text-white w-full"
+          (click)="addToCart(product)"
+        >
           <mat-icon fontSet="material-icons-outlined"
             >add_shopping_cart</mat-icon
           >

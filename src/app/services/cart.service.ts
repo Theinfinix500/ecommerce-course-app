@@ -12,7 +12,7 @@ export class CartService {
   cartItems$ = this.cartItems.asObservable();
 
   addItemToCart(product: Product) {
-    product = { ...product, qty: 1 };
+    product = { ...product, qty: product.qty ? product.qty : 1 };
     const cartItems = this.cartItems.value;
     let searchedProduct = cartItems.find((item) => item.id === product.id);
 
