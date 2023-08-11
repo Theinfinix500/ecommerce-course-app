@@ -2,8 +2,8 @@ import { Product } from '@models/product.model';
 import { Observable } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductForm } from 'src/app/models/product-form.model';
 import { ProductService } from 'src/app/services/product.service';
@@ -22,6 +22,9 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent {
+  @ViewChild('productSubmitForm', { read: NgForm })
+  productFormTemplate!: NgForm;
+
   product$!: Observable<Product>;
   productForm: ProductForm = {
     id: null,
