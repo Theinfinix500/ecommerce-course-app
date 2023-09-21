@@ -24,7 +24,6 @@ export class CounterComponent implements ControlValueAccessor {
   count!: number;
 
   reduceQty() {
-    console.log('reduceQty');
     if (this.count === 1) {
       return;
     }
@@ -34,7 +33,6 @@ export class CounterComponent implements ControlValueAccessor {
   }
 
   addQty() {
-    console.log('addQty');
     this.count = this.count + 1;
     this.changeValue(this.count);
   }
@@ -42,7 +40,6 @@ export class CounterComponent implements ControlValueAccessor {
   writeValue(value: any): void {
     this.value = value;
     this.count = value;
-    console.log(value);
   }
 
   registerOnChange(fn: any): void {

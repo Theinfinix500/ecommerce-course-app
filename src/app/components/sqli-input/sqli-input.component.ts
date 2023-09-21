@@ -26,7 +26,6 @@ export class SqliInputComponent implements ControlValueAccessor {
 
   writeValue(value: any): void {
     this.value = value;
-    console.log(value);
   }
 
   registerOnChange(fn: any): void {

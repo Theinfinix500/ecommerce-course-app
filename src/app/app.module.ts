@@ -38,7 +38,7 @@ function initializeAuth(auth: AuthService) {
         .getUserInfos()
         .pipe(
           catchError((err) => {
-            reject(err);
+            resolve();
             return of(null);
           })
         )
