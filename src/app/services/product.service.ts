@@ -10,7 +10,6 @@ import { ProductForm } from '../models/product-form.model';
   providedIn: 'root',
 })
 export class ProductService {
-  API_URL = 'http://localhost:1337';
 
   constructor(
     private http: HttpClient,
@@ -19,7 +18,7 @@ export class ProductService {
 
   getProducts() {
     return this.http
-      .get<StrapiResponse<Product[]>>(`${this.apiUrl}/products?populate=*`)
+      .get<StrapiResponse<Product[]>>(`/api/products?populate=*`)
       .pipe(
         map(({ data }) =>
           data.map((product) => ({
@@ -27,7 +26,7 @@ export class ProductService {
             image: product.image
               ? {
                   ...product.image,
-                  url: `${this.API_URL}${product.image.url}`,
+                  url: `${product.image.url}`,
                 }
               : null,
           }))
@@ -38,7 +37,7 @@ export class ProductService {
   getProductById(productId: number) {
     return this.http
       .get<StrapiResponse<Product>>(
-        `${this.apiUrl}/products/${productId}?populate=*`
+        `/api/products/${productId}?populate=*`
       )
       .pipe(
         map(({ data: product }) => ({
@@ -46,7 +45,7 @@ export class ProductService {
           image: product.image
             ? {
                 ...product.image,
-                url: `${this.API_URL}${product?.image.url}`,
+                url: `${product?.image.url}`,
               }
             : null,
         }))
@@ -59,14 +58,14 @@ export class ProductService {
 
     formData.append('data', JSON.stringify(product));
 
-    return this.http.post(`${this.apiUrl}/products`, formData);
+    return this.http.post(`/products`, formData);
   }
 
   editProduct({ id: productId, ...product }: ProductForm) {
-    return this.http.put(`${this.apiUrl}/products/${productId}`, product);
+    return this.http.put(`/api/products/${productId}`, product);
   }
 
   deleteProduct(productId: number) {
-    return this.http.delete(`${this.apiUrl}/products/${productId}`);
+    return this.http.delete(`/api/products/${productId}`);
   }
 }

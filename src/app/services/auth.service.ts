@@ -20,7 +20,7 @@ export class AuthService {
 
   signIn(login: LoginForm) {
     return this.http
-      .post<{ jwt: string }>(`${this.apiUrl}/auth/local`, login)
+      .post<{ jwt: string }>(`/api/auth/local`, login)
       .pipe(
         tap(({ jwt }) => {
           this.saveToken(jwt);
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   getUserInfos() {
-    return this.http.get(`${this.apiUrl}/users/me?populate=*`).pipe(
+    return this.http.get(`/api/users/me?populate=*`).pipe(
       tap((user: any) => {
         this.isLoggedIn.next(true);
         this.connectedUser.next(user);
