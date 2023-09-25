@@ -11,6 +11,7 @@ import { HasRoleDirective } from 'src/app/directives/has-role.directive';
 import { SqliInputComponent } from 'src/app/components/sqli-input/sqli-input.component';
 import { FormsModule } from '@angular/forms';
 import { ProductState } from './store/product.state';
+import { FiltersComponent } from 'src/app/components/filters/filters.component';
 
 @NgModule({
   declarations: [ProductComponent],
@@ -23,7 +24,8 @@ import { ProductState } from './store/product.state';
     HasRoleDirective,
     SqliInputComponent,
     FormsModule,
-    NgxsModule.forFeature([ProductState])
+    FiltersComponent,
+    NgxsModule.forFeature([ProductState]),
   ],
 })
 export class ProductModule {}

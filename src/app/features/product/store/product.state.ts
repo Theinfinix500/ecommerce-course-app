@@ -25,8 +25,11 @@ export class ProductState {
   }
 
   @Action(FetchProducts)
-  fetchProducts({ setState }: StateContext<ProductStateModel>) {
-    return this.productService.getProducts().pipe(
+  fetchProducts(
+    { setState }: StateContext<ProductStateModel>,
+    { category }: FetchProducts
+  ) {
+    return this.productService.getProducts(category).pipe(
       tap((products) => {
         setState({ products });
       })

@@ -24,6 +24,8 @@
     New Product
   </button>
 </div>
+<!-- Filters -->
+<app-filters></app-filters>
 <div class="flex gap-6 flex-wrap">
   <ng-container *ngIf="products$ | async as products">
     <app-product-card

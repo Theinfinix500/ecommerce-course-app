@@ -1,9 +1,8 @@
 import { CartService } from './../../services/cart.service';
-import { Component, OnInit, inject } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, switchMap } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { ProductState } from './store/product.state';
 import { FetchProducts } from './store/product.actions';
@@ -14,20 +13,24 @@ import { FetchProducts } from './store/product.actions';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  public productsService: ProductService;
   @Select(ProductState.products) products$!: Observable<Product[]>;
   sqliInput = '';
 
   constructor(
     private router: Router,
+    private activeRouter: ActivatedRoute,
     private cartService: CartService,
     private store: Store
-  ) {
-    this.productsService = inject(ProductService);
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(FetchProducts);
+    this.activeRouter.queryParams
+      .pipe(
+        switchMap((params) => {
+          return this.store.dispatch(new FetchProducts(params['category']));
+        })
+      )
+      .subscribe();
   }
 
   navigateTo(productId: number) {

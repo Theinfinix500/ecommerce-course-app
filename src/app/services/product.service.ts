@@ -10,15 +10,17 @@ import { ProductForm } from '../models/product-form.model';
   providedIn: 'root',
 })
 export class ProductService {
-
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string
   ) {}
 
-  getProducts() {
+  getProducts(category: string) {
+    const query = `&filters[categories][name][$eq]=${category}`;
     return this.http
-      .get<StrapiResponse<Product[]>>(`/api/products?populate=*`)
+      .get<StrapiResponse<Product[]>>(
+        `/api/products?populate=*${category ? query : ''}`
+      )
       .pipe(
         map(({ data }) =>
           data.map((product) => ({
@@ -36,9 +38,7 @@ export class ProductService {
 
   getProductById(productId: number) {
     return this.http
-      .get<StrapiResponse<Product>>(
-        `/api/products/${productId}?populate=*`
-      )
+      .get<StrapiResponse<Product>>(`/api/products/${productId}?populate=*`)
       .pipe(
         map(({ data: product }) => ({
           ...product,
